@@ -45,6 +45,14 @@ async function run(){
             const result = await orderedCollection.insertOne(service);
             res.json(result)
         })
+        //get
+        app.get('/ordered', async (req, res)=>{
+            const email = req.query.email;
+            const query = { useremail: email };
+            const cursor = orderedCollection.find(query);
+            const ordered = await cursor.toArray();
+            res.json(ordered)
+        })
 
         //Delete
         app.delete('/products/:id', async (req, res)=>{
