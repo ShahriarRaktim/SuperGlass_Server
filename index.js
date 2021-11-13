@@ -33,6 +33,10 @@ async function run() {
       const result = await productsCollection.find({}).toArray();
       res.send(result);
     });
+    app.get("/allorder", async (req, res) => {
+      const result = await orderedCollection.find({}).toArray();
+      res.send(result);
+    });
 
     //Get All
     app.get("/reviews", async (req, res) => {
@@ -58,6 +62,18 @@ async function run() {
     app.post("/users", async (req, res) => {
       const user = req.body;
       const result = await usersCollection.insertOne(user);
+      console.log(result);
+      res.json(result);
+    });
+    app.post("/ordered", async (req, res) => {
+      const user = req.body;
+      const result = await orderedCollection.insertOne(user);
+      console.log(result);
+      res.json(result);
+    });
+    app.post("/addproduct", async (req, res) => {
+      const user = req.body;
+      const result = await productsCollection.insertOne(user);
       console.log(result);
       res.json(result);
     });
@@ -103,6 +119,12 @@ async function run() {
       const id = req.params.id;
       const service = { _id: ObjectId(id) };
       const result = await orderedCollection.deleteOne(service);
+      res.send(result);
+    });
+    app.delete("/products/:id", async (req, res) => {
+      const id = req.params.id;
+      const service = { _id: ObjectId(id) };
+      const result = await productsCollection.deleteOne(service);
       res.send(result);
     });
     //put make admin
