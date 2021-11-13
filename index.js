@@ -120,7 +120,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Running Glass Server");
+  res.send("Running Glasses Server");
 });
 
 app.listen(port, () => {
